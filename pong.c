@@ -37,14 +37,20 @@ void game_loop(){
 
         const Uint8* keystates = SDL_GetKeyboardState(NULL);
 
+	printf("player1 position : %d\n", player1.pos_y);
         // Down movement
         if (
             keystates[SDL_SCANCODE_J] ||
             keystates[SDL_SCANCODE_S] ||
             keystates[SDL_SCANCODE_DOWN]
         ){
-            printf("Move down\n");
+            //printf("Move down\n");
             player1.pos_y += 5;
+	    if(player1.pos_y >= HEIGHT){
+		player1.pos_y = 0;
+
+	    }
+
         }
 
         // Up movement
@@ -53,8 +59,12 @@ void game_loop(){
             keystates[SDL_SCANCODE_W] ||
             keystates[SDL_SCANCODE_UP]
         ){
-            printf("Move up\n");
+            //printf("Move up\n");
             player1.pos_y -= 5;
+	    if(player1.pos_y <= 0){
+		player1.pos_y = HEIGHT;
+
+	    }
         }
 
 
