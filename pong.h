@@ -26,3 +26,4 @@ int setup();
 void event_loop();
 void game_loop();
 void render_game_state(tPlayer *player1, tPlayer *player2);
+void render_board();
