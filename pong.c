@@ -37,20 +37,17 @@ void game_loop(){
 
         const Uint8* keystates = SDL_GetKeyboardState(NULL);
 
-	printf("player1 position : %d\n", player1.pos_y);
+	    printf("player1 position : %d\n", player1.pos_y);
         // Down movement
         if (
             keystates[SDL_SCANCODE_J] ||
             keystates[SDL_SCANCODE_S] ||
             keystates[SDL_SCANCODE_DOWN]
         ){
-            //printf("Move down\n");
             player1.pos_y += 5;
-	    if(player1.pos_y >= HEIGHT){
-		player1.pos_y = 0;
-
-	    }
-
+            if (player1.pos_y >= HEIGHT){
+                player1.pos_y = 0;
+            }
         }
 
         // Up movement
@@ -59,14 +56,11 @@ void game_loop(){
             keystates[SDL_SCANCODE_W] ||
             keystates[SDL_SCANCODE_UP]
         ){
-            //printf("Move up\n");
             player1.pos_y -= 5;
-	    if(player1.pos_y <= 0){
-		player1.pos_y = HEIGHT;
-
-	    }
+            if (player1.pos_y <= 0){
+                player1.pos_y = HEIGHT;
+            }
         }
-
 
         // This measures how long this iteration of the loop took
         frame_time = SDL_GetTicks() - frame_start;
@@ -91,9 +85,9 @@ void event_loop(){
 void render_game_state(tPlayer *player1, tPlayer *player2){
     render_board();
     rect1.x = 30;
-    rect1.y = player1->pos_y+20;
+    rect1.y = player1->pos_y-25;
     rect1.w = 4;
-    rect1.h = 40;
+    rect1.h = 50;
     SDL_RenderFillRect(renderer, &rect1);
     SDL_RenderPresent(renderer);
 }
