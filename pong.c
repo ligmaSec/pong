@@ -1,19 +1,15 @@
-#include <stdio.h>
-#include <stdbool.h>
-#include <SDL2/SDL.h>
+#include "pong.h"
 
-const int WIDTH = 800, HEIGHT = 600;
-const int FPS = 30, FRAME_DELAY = 1000/FPS;
+int main(int argc, char *argv[]){
+    setup();
+    game_loop();
+    return EXIT_SUCCESS;
+}
 
-Uint32 frame_start;
-int frame_time;
-
-bool playing = false;
-
-int main( int argc, char *argv[] ){
+int setup(){
     SDL_Init(SDL_INIT_EVERYTHING);
 
-    SDL_Window *window = SDL_CreateWindow("pong", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, WIDTH, HEIGHT, SDL_WINDOW_ALLOW_HIGHDPI);
+    window = SDL_CreateWindow("pong", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, WIDTH, HEIGHT, SDL_WINDOW_ALLOW_HIGHDPI);
     if (window == NULL){
         printf("Could not create window: %s ", SDL_GetError());
         return 1;
@@ -32,17 +28,16 @@ int main( int argc, char *argv[] ){
         }
     }
     SDL_RenderPresent(renderer);
+    return 0;
+}
 
+void game_loop(){
     playing = true;
     while (playing){
         // Stores the number of ticks at the start of the loop
         frame_start = SDL_GetTicks();
 
-        SDL_Event event;
-        while (SDL_PollEvent(&event)){
-            if (event.type == SDL_QUIT)
-            { playing = false; }
-        }
+        event_loop();
 
         const Uint8* keystates = SDL_GetKeyboardState(NULL);
 
@@ -72,5 +67,13 @@ int main( int argc, char *argv[] ){
     }
     SDL_DestroyWindow(window);
     SDL_Quit();
-    return EXIT_SUCCESS;
+}
+
+void event_loop(){
+    SDL_Event event;
+    while (SDL_PollEvent(&event)){
+        if (event.type == SDL_QUIT){
+            playing = false;
+        }
+    }
 }
