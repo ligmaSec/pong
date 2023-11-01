@@ -21,7 +21,8 @@ int frame_time;
 // Global variables
 SDL_Window *window;
 SDL_Renderer *renderer;
-SDL_Rect rect1;
+SDL_Rect rect_player1;
+SDL_Rect rect_player2;
 bool playing = false;
 
 // Prototypes

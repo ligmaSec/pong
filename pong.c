@@ -19,6 +19,14 @@ int render_setup(){
 
     renderer = SDL_CreateRenderer(window, -1, 0);
     render_board();
+
+    rect_player1.x = 30;
+    rect_player1.w = 4;
+    rect_player1.h = 50;
+    rect_player2.x = WIDTH-34;
+    rect_player2.w = 4;
+    rect_player2.h = 50;
+
     return 0;
 }
 
@@ -85,11 +93,10 @@ void event_loop(){
 
 void render_game_state(tPlayer *player1, tPlayer *player2){
     render_board();
-    rect1.x = 30;
-    rect1.y = player1->pos_y-25;
-    rect1.w = 4;
-    rect1.h = 50;
-    SDL_RenderFillRect(renderer, &rect1);
+    rect_player1.y = player1->pos_y-25;
+    rect_player2.y = player2->pos_y-25;
+    SDL_RenderFillRect(renderer, &rect_player1);
+    SDL_RenderFillRect(renderer, &rect_player2);
     SDL_RenderPresent(renderer);
 }
 
