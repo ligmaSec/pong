@@ -38,7 +38,7 @@ int main( int argc, char *argv[] )
         while ( SDL_PollEvent( &event ) )
         {
             if (event.type == SDL_QUIT)
-            { break; }
+            { playing = false; }
 
             // if ( SDL_KEYDOWN == event.type )
             // {	
