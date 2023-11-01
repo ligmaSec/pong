@@ -1,9 +1,7 @@
 #include <stdio.h>
-struct move{
-
-}
+#include "gui.h"
 
 int main(int argc, char** argv){
-
+	setup();
 	return 0;
 }
