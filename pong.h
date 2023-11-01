@@ -9,7 +9,7 @@ typedef struct {
 
 // Constants
 const int WIDTH = 800, HEIGHT = 600;
-const int FPS = 30, FRAME_DELAY = 1000/FPS;
+const int FPS = 144, FRAME_DELAY = 1000/FPS;
 
 // Framerate variables
 Uint32 frame_start;
