@@ -1,13 +1,14 @@
 #include "pong.h"
 #include "net.h"
 
+// TODO: hardcore mode
 int main(int argc, char *argv[]){
-    setup();
+    render_setup();
     game_loop();
     return EXIT_SUCCESS;
 }
 
-int setup(){
+int render_setup(){
     SDL_Init(SDL_INIT_EVERYTHING);
 
     window = SDL_CreateWindow("pong", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, WIDTH, HEIGHT, SDL_WINDOW_ALLOW_HIGHDPI);
@@ -33,12 +34,9 @@ void game_loop(){
         frame_start = SDL_GetTicks();
 
         event_loop();
-
         render_game_state(&player1, &player2);
 
         const Uint8* keystates = SDL_GetKeyboardState(NULL);
-
-	    printf("player1 position : %d\n", player1.pos_y);
         // Down movement
         if (
             keystates[SDL_SCANCODE_J] ||
@@ -63,9 +61,11 @@ void game_loop(){
             }
         }
 
+	    printf("player1 position : %d\n", player1.pos_y);
+
         // This measures how long this iteration of the loop took
         frame_time = SDL_GetTicks() - frame_start;
-        // This keeps us from displaying more frames than 30/Second
+        // This keeps us from displaying more frames than 144/Second
         if (FRAME_DELAY > frame_time){
             SDL_Delay(FRAME_DELAY - frame_time);
         }

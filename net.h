@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <stdbool.h>
 
-void test();
+// Prototypes
+void net_setup(bool is_receiver);
 
 #endif

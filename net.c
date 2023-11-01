@@ -1,5 +1,5 @@
 #include "net.h"
 
-void test(){
-    printf("Test");
+void net_setup(bool is_receiver){
+
 }

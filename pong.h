@@ -25,7 +25,7 @@ SDL_Rect rect1;
 bool playing = false;
 
 // Prototypes
-int setup();
+int render_setup();
 void event_loop();
 void game_loop();
 void render_game_state(tPlayer *player1, tPlayer *player2);
