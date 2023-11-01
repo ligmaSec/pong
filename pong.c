@@ -15,7 +15,7 @@ int setup(){
         return 1;
     }
 
-    SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, 0);
+    renderer = SDL_CreateRenderer(window, -1, 0);
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
     SDL_RenderClear(renderer);
     // Draw middle line
@@ -32,6 +32,11 @@ int setup(){
 }
 
 void game_loop(){
+    tPlayer player1;
+    player1.pos_y = HEIGHT/2;
+    tPlayer player2;
+    player2.pos_y = HEIGHT/2;
+
     playing = true;
     while (playing){
         // Stores the number of ticks at the start of the loop
@@ -39,11 +44,15 @@ void game_loop(){
 
         event_loop();
 
+        render_game_state(&player1, &player2);
+
         const Uint8* keystates = SDL_GetKeyboardState(NULL);
 
         // Down movement
-        if (keystates[SDL_SCANCODE_J])
-        { printf("J is pressed - Move down\n");}
+        if (keystates[SDL_SCANCODE_J]){
+            printf("J is pressed - Move down\n");
+            player1.pos_y += 5;
+        }
         else if (keystates[SDL_SCANCODE_S])
         { printf("S is pressed - Move down\n"); }
         else if (keystates[SDL_SCANCODE_DOWN])
@@ -76,4 +85,13 @@ void event_loop(){
             playing = false;
         }
     }
+}
+
+void render_game_state(tPlayer *player1, tPlayer *player2){
+    rect1.x = 30;
+    rect1.y = player1->pos_y+20;
+    rect1.w = 2;
+    rect1.h = 40;
+    SDL_RenderDrawRect(renderer, &rect1);
+    SDL_RenderPresent(renderer);
 }
