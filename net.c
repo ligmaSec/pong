@@ -1,6 +1,5 @@
-#include <stdio.h>
+#include "net.h"
 
-int networking(){
-
-	return 69;
+void test(){
+    printf("Test");
 }

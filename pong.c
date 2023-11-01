@@ -1,9 +1,9 @@
 #include "pong.h"
+#include "net.h"
 
 int main(int argc, char *argv[]){
-    printf("%d\n",networking());
-    //setup();
-    //game_loop();
+    setup();
+    game_loop();
     return EXIT_SUCCESS;
 }
 

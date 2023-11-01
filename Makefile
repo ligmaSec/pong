@@ -1,5 +1,6 @@
 pong: net.o pong.o
 	gcc -o pong pong.o net.o -lSDL2
+
 net.o:
 	gcc -o net.o net.c -c
 

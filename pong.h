@@ -1,3 +1,6 @@
+#ifndef PONG_H
+#define PONG_H
+
 #include <stdio.h>
 #include <stdbool.h>
 #include <SDL2/SDL.h>
@@ -27,3 +30,5 @@ void event_loop();
 void game_loop();
 void render_game_state(tPlayer *player1, tPlayer *player2);
 void render_board();
+
+#endif
