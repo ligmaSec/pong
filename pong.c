@@ -22,6 +22,15 @@ int main( int argc, char *argv[] ){
     SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, 0);
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
     SDL_RenderClear(renderer);
+    // Draw middle line
+    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+    for (int i=(WIDTH/2)-1; i<(WIDTH/2)+1; i++){
+        for (int j=0; j<HEIGHT; j++){
+            if (j%18 < 9){
+                SDL_RenderDrawPoint(renderer, i, j);
+            }
+        }
+    }
     SDL_RenderPresent(renderer);
 
     playing = true;
@@ -37,7 +46,7 @@ int main( int argc, char *argv[] ){
 
         const Uint8* keystates = SDL_GetKeyboardState(NULL);
 
-        // down movement
+        // Down movement
         if (keystates[SDL_SCANCODE_J])
         { printf("J is pressed - Move down\n");}
         else if (keystates[SDL_SCANCODE_S])
@@ -45,7 +54,7 @@ int main( int argc, char *argv[] ){
         else if (keystates[SDL_SCANCODE_DOWN])
         { printf("down key is pressed - Move down\n");}
 
-        // up movement
+        // Up movement
         if (keystates[SDL_SCANCODE_K])
         { printf( "K is pressed - Move up\n");}
         else if (keystates[SDL_SCANCODE_W])
