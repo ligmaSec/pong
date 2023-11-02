@@ -32,7 +32,6 @@ void send_position(int pos){
 }
 
 int recv_position(){
-    printf("i got called");
     int len = sizeof(cliaddr);
     int opp_pos;
     recvfrom(sockfd, &opp_pos, sizeof(opp_pos), MSG_WAITALL, 

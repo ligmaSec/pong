@@ -25,7 +25,7 @@ SDL_Window *window;
 SDL_Renderer *renderer;
 SDL_Rect rect_player1;
 SDL_Rect rect_player2;
-bool playing = false;
+bool playing = true;
 
 // Prototypes
 int render_setup();

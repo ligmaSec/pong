@@ -4,19 +4,20 @@
 int main(int argc, char *argv[]){
 	render_setup();
     net_setup(true);
-    game_loop();
 
     pthread_t receive_thread_id; 
     pthread_create(&receive_thread_id, NULL, receive_routine, NULL);
-    pthread_join(receive_thread_id, NULL);
+    // pthread_join(receive_thread_id, NULL);
 
+    game_loop();
     return EXIT_SUCCESS;
 }
 
 void *receive_routine(void *arg){
     while (playing){
         player2.pos_y = recv_position();
-        printf("%d", player2.pos_y);
+        printf("Opp position: %d\n", player2.pos_y);
+        send_position(player1.pos_y);
     }
 }
 
