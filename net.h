@@ -4,5 +4,6 @@
 #include <stdbool.h>
 #include <SDL2/SDL_net.h>
 
-void test();
+// Prototypes
+void net_setup(bool is_receiver);
 

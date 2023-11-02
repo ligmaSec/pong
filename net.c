@@ -1,9 +1,5 @@
 #include "net.h"
 
-void test(){
+void net_setup(bool is_receiver){
 
 }
-
-
-
-
