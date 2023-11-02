@@ -21,11 +21,9 @@ int render_setup(){
     render_board();
 
     rect_player1.x = 30;
-    rect_player1.w = 4;
-    rect_player1.h = 50;
     rect_player2.x = WIDTH-34;
-    rect_player2.w = 4;
-    rect_player2.h = 50;
+    rect_player1.w, rect_player2.w = 4;
+    rect_player1.h, rect_player2.h = 50;
 
     return 0;
 }
@@ -87,7 +85,8 @@ void event_loop(){
     while (SDL_PollEvent(&event)){
         if (event.type == SDL_QUIT){
             playing = false;
-        }
+            break;
+        } 
     }
 }
 
@@ -101,6 +100,7 @@ void render_game_state(tPlayer *player1, tPlayer *player2){
 }
 
 void render_board(){
+    // Black background
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
     SDL_RenderClear(renderer);
     // Draw middle line
