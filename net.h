@@ -17,6 +17,6 @@ int sockfd;
 struct sockaddr_in servaddr, cliaddr;
 
 // Prototypes
-void net_setup(bool is_server);
+void net_setup(bool is_server, char* host);
 void send_position(int pos);
 int recv_position();

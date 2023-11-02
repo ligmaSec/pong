@@ -2,8 +2,26 @@
 
 // TODO: hardcore mode
 int main(int argc, char *argv[]){
+    int invalid_args = true;
+    char* host = "127.0.0.1";
+    int opt;
+    while((opt = getopt(argc, argv, "c:")) != -1){  
+        switch(opt){  
+            case 'c':
+                printf("Client mode\n");
+                invalid_args = false;
+                is_server = false;
+                host = optarg;
+                break;
+        }
+    }
+
+    if (argc != 1 && invalid_args){
+        exit(1);
+    }
+
 	render_setup();
-    net_setup(true);
+    net_setup(false, host);
 
     pthread_t receive_thread_id; 
     pthread_create(&receive_thread_id, NULL, receive_routine, NULL);
@@ -14,11 +32,18 @@ int main(int argc, char *argv[]){
 }
 
 void *receive_routine(){
-	printf("hello\n");
-    while (playing){
-        player2.pos_y = recv_position();
-        printf("Opp position: %d\n", player2.pos_y);
-        send_position(player1.pos_y);
+    if (is_server){
+        while (playing){
+            player2.pos_y = recv_position();
+            printf("Opp position: %d\n", player2.pos_y);
+            send_position(player1.pos_y);
+        }
+    } else {
+        while (playing){
+            send_position(player1.pos_y);
+            player2.pos_y = recv_position();
+            printf("Opp position: %d\n", player2.pos_y);
+        }
     }
 }
 

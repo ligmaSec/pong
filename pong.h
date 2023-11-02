@@ -4,6 +4,7 @@
 #include <stdbool.h>
 #include <SDL2/SDL.h>
 #include <pthread.h> 
+#include <unistd.h> 
 
 // Structs
 typedef struct {
@@ -26,6 +27,7 @@ SDL_Renderer *renderer;
 SDL_Rect rect_player1;
 SDL_Rect rect_player2;
 bool playing = true;
+bool is_server = true;
 
 // Prototypes
 int render_setup();

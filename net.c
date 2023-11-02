@@ -1,12 +1,12 @@
 #include "net.h"
 
-void net_setup(bool is_server){
-	if (is_server){
-        if ((sockfd = socket(AF_INET, SOCK_DGRAM, 0)) < 0){
-            perror("Socket creation failed");
-            exit(1);
-        }
+void net_setup(bool is_server, char* host){
+    if ((sockfd = socket(AF_INET, SOCK_DGRAM, 0)) < 0){
+        perror("Socket creation failed");
+        exit(1);
+    }
 
+	if (is_server){
         memset(&servaddr, 0, sizeof(servaddr));
         memset(&cliaddr, 0, sizeof(cliaddr));
 
@@ -22,7 +22,11 @@ void net_setup(bool is_server){
             exit(1);
         }
 	} else {
-
+        memset(&servaddr, 0, sizeof(servaddr));
+        // Filling server information
+        servaddr.sin_family = AF_INET; // IPv4
+        servaddr.sin_port = htons(PORT);
+        servaddr.sin_addr.s_addr = inet_addr("81.244.238.170");
 	}
 }
 
