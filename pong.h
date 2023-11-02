@@ -1,5 +1,5 @@
-#ifndef PONG_H
-#define PONG_H
+#pragma once
+
 
 #include <stdio.h>
 #include <stdbool.h>
@@ -31,4 +31,3 @@ void game_loop();
 void render_game_state(tPlayer *player1, tPlayer *player2);
 void render_board();
 
-#endif

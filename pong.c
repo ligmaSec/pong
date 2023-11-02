@@ -2,6 +2,7 @@
 #include "net.h"
 
 int main(int argc, char *argv[]){
+    test();
     setup();
     game_loop();
     return EXIT_SUCCESS;
