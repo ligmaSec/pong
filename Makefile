@@ -1,9 +1,9 @@
-CC = cc
+CC = gcc
 
 
 pong: net.o pong.o
 	mkdir bin/
-	$(CC) -o bin/pong pong.o net.o -lSDL2
+	$(CC) -o bin/pong pong.o net.o -lSDL2 -pthread
 
 net.o:
 	$(CC) -o net.o net.c -c

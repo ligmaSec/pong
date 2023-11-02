@@ -16,7 +16,7 @@ void net_setup(bool is_server){
         servaddr.sin_port = htons(PORT);
 
         // Bind the socket with the server address
-        if (bind(sockfd, (const struct sockaddr)&servaddr,
+        if (bind(sockfd, (const struct sockaddr *) &servaddr,
                 sizeof(servaddr)) < 0){
             perror("Bind failed");
             exit(1);
@@ -32,9 +32,10 @@ void send_position(int pos){
 }
 
 int recv_position(){
+    printf("i got called");
     int len = sizeof(cliaddr);
     int opp_pos;
     recvfrom(sockfd, &opp_pos, sizeof(opp_pos), MSG_WAITALL, 
-        (struct sockaddr) &servaddr, &len);
+        (struct sockaddr *) &servaddr, &len);
     return opp_pos;
 }

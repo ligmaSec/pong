@@ -1,14 +1,24 @@
 #include "pong.h"
-#include "net.h"
 
 // TODO: hardcore mode
 int main(int argc, char *argv[]){
-	render_setup();	
+	render_setup();
+    net_setup(true);
     game_loop();
+
+    pthread_t receive_thread_id; 
+    pthread_create(&receive_thread_id, NULL, receive_routine, NULL);
+    pthread_join(receive_thread_id, NULL);
+
     return EXIT_SUCCESS;
-	
 }
 
+void *receive_routine(void *arg){
+    while (playing){
+        player2.pos_y = recv_position();
+        printf("%d", player2.pos_y);
+    }
+}
 
 int render_setup(){
     SDL_Init(SDL_INIT_EVERYTHING);
@@ -63,7 +73,7 @@ void game_loop(){
             move_player1(-5);
         }
 
-	    printf("player1 position : %d\n", player1.pos_y);
+	    // printf("player1 position : %d\n", player1.pos_y);
 
         // This measures how long this iteration of the loop took
         frame_time = SDL_GetTicks() - frame_start;

@@ -1,9 +1,9 @@
 #pragma once
 
-
 #include <stdio.h>
 #include <stdbool.h>
 #include <SDL2/SDL.h>
+#include <pthread.h> 
 
 // Structs
 typedef struct {
@@ -34,4 +34,4 @@ void game_loop();
 void render_game_state();
 void render_board();
 void move_player1(int step);
-
+void *receive_routine();
