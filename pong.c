@@ -4,16 +4,17 @@
 int main(int argc, char *argv[]){
 	render_setup();
     net_setup(true);
-    game_loop();
 
-    pthread_t receive_thread_id; 
-    pthread_create(&receive_thread_id, NULL, receive_routine, NULL);
-    pthread_join(receive_thread_id, NULL);
+    pthread_t receive_t; 
+    pthread_create(&receive_t, NULL, &receive_routine, NULL);
+    pthread_join(receive_t, NULL);
 
+	game_loop();
     return EXIT_SUCCESS;
 }
 
-void *receive_routine(void *arg){
+void *receive_routine(){
+	printf("hello\n");
     while (playing){
         player2.pos_y = recv_position();
         printf("%d", player2.pos_y);

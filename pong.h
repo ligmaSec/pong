@@ -29,9 +29,10 @@ bool playing = false;
 
 // Prototypes
 int render_setup();
-void event_loop();
 void game_loop();
+void event_loop();
 void render_game_state();
+
 void render_board();
 void move_player1(int step);
 void *receive_routine();
