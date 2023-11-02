@@ -21,7 +21,8 @@ int main(int argc, char *argv[]){
     }
 
 	render_setup();
-    net_setup(false, host);
+    
+    net_setup(is_server, host);
 
     pthread_t receive_thread_id; 
     pthread_create(&receive_thread_id, NULL, receive_routine, NULL);

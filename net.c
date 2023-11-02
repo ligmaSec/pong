@@ -26,7 +26,8 @@ void net_setup(bool is_server, char* host){
         // Filling server information
         servaddr.sin_family = AF_INET; // IPv4
         servaddr.sin_port = htons(PORT);
-        servaddr.sin_addr.s_addr = inet_addr("81.244.238.170");
+        printf("%s\n", host);
+        servaddr.sin_addr.s_addr = inet_addr(host);
 	}
 }
 
