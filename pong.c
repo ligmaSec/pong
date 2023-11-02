@@ -22,8 +22,10 @@ int render_setup(){
 
     rect_player1.x = 30;
     rect_player2.x = WIDTH-34;
-    rect_player1.w, rect_player2.w = 4;
-    rect_player1.h, rect_player2.h = 50;
+    rect_player1.w= 4;
+    rect_player2.w = 4;
+    rect_player1.h = 50;
+    rect_player2.h = 50;
 
     return 0;
 }
