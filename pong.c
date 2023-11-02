@@ -31,9 +31,7 @@ int render_setup(){
 }
 
 void game_loop(){
-    tPlayer player1;
     player1.pos_y = HEIGHT/2;
-    tPlayer player2;
     player2.pos_y = HEIGHT/2;
 
     playing = true;
@@ -42,7 +40,7 @@ void game_loop(){
         frame_start = SDL_GetTicks();
 
         event_loop();
-        render_game_state(&player1, &player2);
+        render_game_state();
 
         const Uint8* keystates = SDL_GetKeyboardState(NULL);
         // Down movement
@@ -51,10 +49,7 @@ void game_loop(){
             keystates[SDL_SCANCODE_S] ||
             keystates[SDL_SCANCODE_DOWN]
         ){
-            player1.pos_y += 5;
-            if (player1.pos_y >= HEIGHT){
-                player1.pos_y = 0;
-            }
+            move_player1(5);
         }
 
         // Up movement
@@ -63,10 +58,7 @@ void game_loop(){
             keystates[SDL_SCANCODE_W] ||
             keystates[SDL_SCANCODE_UP]
         ){
-            player1.pos_y -= 5;
-            if (player1.pos_y <= 0){
-                player1.pos_y = HEIGHT;
-            }
+            move_player1(-5);
         }
 
 	    printf("player1 position : %d\n", player1.pos_y);
@@ -88,14 +80,29 @@ void event_loop(){
         if (event.type == SDL_QUIT){
             playing = false;
             break;
-        } 
+        } else if (event.type == SDL_MOUSEWHEEL){
+            if (event.wheel.y > 0){ // scroll up
+                move_player1(-15);
+            } else if (event.wheel.y < 0){ // scroll down
+                move_player1(15);
+            }
+        }
     }
 }
 
-void render_game_state(tPlayer *player1, tPlayer *player2){
+void move_player1(int step){
+    player1.pos_y += step;
+    if (player1.pos_y <= 0){
+        player1.pos_y = HEIGHT;
+    } else if (player1.pos_y >= HEIGHT){
+        player1.pos_y = 0;
+    }
+}
+
+void render_game_state(){
     render_board();
-    rect_player1.y = player1->pos_y-25;
-    rect_player2.y = player2->pos_y-25;
+    rect_player1.y = player1.pos_y-25;
+    rect_player2.y = player2.pos_y-25;
     SDL_RenderFillRect(renderer, &rect_player1);
     SDL_RenderFillRect(renderer, &rect_player2);
     SDL_RenderPresent(renderer);

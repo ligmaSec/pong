@@ -19,6 +19,8 @@ Uint32 frame_start;
 int frame_time;
 
 // Global variables
+tPlayer player1;
+tPlayer player2;
 SDL_Window *window;
 SDL_Renderer *renderer;
 SDL_Rect rect_player1;
@@ -29,7 +31,8 @@ bool playing = false;
 int render_setup();
 void event_loop();
 void game_loop();
-void render_game_state(tPlayer *player1, tPlayer *player2);
+void render_game_state();
 void render_board();
+void move_player1(int step);
 
 #endif
