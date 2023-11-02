@@ -2,6 +2,7 @@
 
 #include <stdio.h>
 #include <stdbool.h>
+#include <stdlib.h>
 #include <unistd.h>
 #include <string.h>
 #include <sys/types.h>
@@ -11,9 +12,11 @@
 
 #define PORT	6969
 
+// Global variables
+int sockfd;
+struct sockaddr_in servaddr, cliaddr;
 
 // Prototypes
 void net_setup(bool is_server);
-
 void send_position(int pos);
 int recv_position();
