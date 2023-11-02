@@ -3,10 +3,12 @@
 
 // TODO: hardcore mode
 int main(int argc, char *argv[]){
-    render_setup();
+	render_setup();	
     game_loop();
     return EXIT_SUCCESS;
+	
 }
+
 
 int render_setup(){
     SDL_Init(SDL_INIT_EVERYTHING);

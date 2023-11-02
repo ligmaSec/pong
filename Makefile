@@ -1,4 +1,4 @@
-CC = gcc
+CC = cc
 
 
 pong: net.o pong.o
