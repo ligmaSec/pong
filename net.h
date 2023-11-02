@@ -6,4 +6,3 @@
 
 // Prototypes
 void net_setup(bool is_receiver);
-
