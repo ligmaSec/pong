@@ -13,7 +13,8 @@ int main(int argc, char *argv[]){
     return EXIT_SUCCESS;
 }
 
-void *receive_routine(void *arg){
+void *receive_routine(){
+	printf("hello\n");
     while (playing){
         player2.pos_y = recv_position();
         printf("Opp position: %d\n", player2.pos_y);
