@@ -6,11 +6,12 @@
 #include <pthread.h> 
 #include <unistd.h>
 #include <math.h>
+#include <SDL/SDL_ttf>
 
 // Constants
 const int WIDTH = 800, HEIGHT = 600;
 const int FPS = 144, FRAME_DELAY = 1000/FPS;
-const int BALL_RADIUS = 3;
+const int BALL_RADIUS = 30;
 const float MAX_BOUNCE_ANGLE = (5*M_PI)/12;
 
 // Structs
@@ -34,6 +35,7 @@ SDL_Window *window;
 SDL_Renderer *renderer;
 SDL_Rect rect_player1;
 SDL_Rect rect_player2;
+SDL_Surface* text;
 bool playing = true;
 bool is_server = true;
 float ball_speed = 1;
@@ -46,6 +48,7 @@ void event_loop();
 void game_loop();
 void draw_ball();
 void move_ball();
+void draw_score(int player1_score, player2_score);
 void check_collision();
 void update_ball_direction(tPlayer *player);
 void render_game_state();

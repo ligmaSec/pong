@@ -227,3 +227,10 @@ void update_ball_direction(tPlayer *player){
     float angle_change = normalized_intersect * MAX_BOUNCE_ANGLE;
     ball_direction = M_PI - ball_direction + 2 * angle_change;
 }
+
+
+void draw_score(int player1_score, int player2_score){
+	
+		
+
+}
