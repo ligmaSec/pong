@@ -120,8 +120,6 @@ void game_loop(){
         ){
             move_player1(-PLAYER_MOVEMENT_STEP);
         }
-
-        // ball.pos_x = player1.pos_y;
         move_ball();
 
         // This measures how long this iteration of the loop took
@@ -235,6 +233,20 @@ void check_collision(){
     else if (ball.pos_y <= 0 || ball.pos_y >= HEIGHT){
         ball_direction -= M_PI/2;
     }
+
+    // Handle player2 win
+    else if (ball.pos_x <= 0){
+        scores[0] += 1;
+        printf("Scores: %d:%d\n", scores[0], scores[1]);
+        reset_ball(true);
+    }
+
+    // Handle player1 win
+    else if (ball.pos_x >= WIDTH){
+        scores[1] += 1;
+        printf("Scores: %d:%d\n", scores[0], scores[1]);
+        reset_ball(false);
+    }
 }
 
 void update_ball_direction(tPlayer *player){
@@ -244,4 +256,12 @@ void update_ball_direction(tPlayer *player){
     ball_direction = M_PI - ball_direction + 2 * angle_change;
 }
 
-
+void reset_ball(bool ball_direction_right){
+    if (ball_direction_right){
+        ball_direction = 2*M_PI;
+    } else {
+        ball_direction = M_PI;
+    }
+    ball.pos_x = WIDTH/2;
+    ball.pos_y = HEIGHT/2;
+}
