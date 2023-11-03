@@ -21,18 +21,17 @@ int main(int argc, char *argv[]){
     }
 
 	render_setup();
-    
     net_setup(is_server, host);
 
     pthread_t receive_thread_id; 
-    pthread_create(&receive_thread_id, NULL, receive_routine, NULL);
+    pthread_create(&receive_thread_id, NULL, net_routine, NULL);
     // pthread_join(receive_thread_id, NULL);
 
     game_loop();
     return EXIT_SUCCESS;
 }
 
-void *receive_routine(){
+void *net_routine(){
     if (is_server){
         while (playing){
             player2.pos_y = recv_position();
@@ -60,6 +59,10 @@ int render_setup(){
     renderer = SDL_CreateRenderer(window, -1, 0);
     render_board();
 
+    // Verticaly center players
+    player1.pos_y = HEIGHT/2;
+    player2.pos_y = HEIGHT/2;
+
     rect_player1.x = 30;
     rect_player2.x = WIDTH-34;
     rect_player1.w= 4;
@@ -67,14 +70,15 @@ int render_setup(){
     rect_player1.h = 50;
     rect_player2.h = 50;
 
+    // Center ball
+    ball.pos_y = HEIGHT/2;
+    ball.pos_x = WIDTH/2;
+    ball.radius = 3;
+
     return 0;
 }
 
 void game_loop(){
-    player1.pos_y = HEIGHT/2;
-    player2.pos_y = HEIGHT/2;
-
-    playing = true;
     while (playing){
         // Stores the number of ticks at the start of the loop
         frame_start = SDL_GetTicks();
@@ -101,7 +105,7 @@ void game_loop(){
             move_player1(-5);
         }
 
-	    // printf("player1 position : %d\n", player1.pos_y);
+        // ball.pos_x = player1.pos_y;
 
         // This measures how long this iteration of the loop took
         frame_time = SDL_GetTicks() - frame_start;
@@ -145,6 +149,7 @@ void render_game_state(){
     rect_player2.y = player2.pos_y-25;
     SDL_RenderFillRect(renderer, &rect_player1);
     SDL_RenderFillRect(renderer, &rect_player2);
+    draw_ball();
     SDL_RenderPresent(renderer);
 }
 
@@ -162,4 +167,17 @@ void render_board(){
         }
     }
     SDL_RenderPresent(renderer);
+}
+
+void draw_ball(){
+    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+    for (int w = 0; w < ball.radius * 2; w++){
+        for (int h = 0; h < ball.radius * 2; h++){
+            int dx = ball.radius - w; // horizontal offset
+            int dy = ball.radius - h; // vertical offset
+            if ((dx*dx + dy*dy) <= (ball.radius * ball.radius)){
+                SDL_RenderDrawPoint(renderer, ball.pos_x + dx, ball.pos_y + dy);
+            }
+        }
+    }
 }
