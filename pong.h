@@ -37,7 +37,7 @@ SDL_Rect rect_player2;
 bool playing = true;
 bool is_server = true;
 float ball_speed = 1;
-float ball_direction = 1*M_PI;
+float ball_direction = 2*M_PI;
 
 // Prototypes
 int render_setup();

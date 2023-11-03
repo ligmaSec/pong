@@ -204,7 +204,6 @@ void check_collision(){
         ball.pos_y >= player2.pos_y-25 &&
         ball.pos_x == rect_player2.x
     ){
-        printf("Collision player2\n");
         update_ball_direction(&player2);
     }
 
@@ -214,15 +213,13 @@ void check_collision(){
         ball.pos_y >= player1.pos_y-25 &&
         ball.pos_x == rect_player1.x
     ){
-        printf("Collision player1\n");
         update_ball_direction(&player1);
     }
 }
 
 void update_ball_direction(tPlayer *player){
-    float offset = (ball.pos_y - player->pos_y) / (rect_player1.h);
-    float phi = 0.25*M_PI*(2*offset-1);
-    float dirX = (ball_speed * cos(ball_direction))*-1;
-    float dirY = ball_speed*sin(phi);
-    ball_direction = atan2(dirY, dirX);
+    float relative_intersect_y = ball.pos_y - player->pos_y;
+    float normalized_intersect = relative_intersect_y / rect_player1.h;
+    float angle_change = normalized_intersect * MAX_BOUNCE_ANGLE;
+    ball_direction = M_PI - ball_direction + 2 * angle_change;
 }
