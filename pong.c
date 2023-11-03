@@ -73,7 +73,6 @@ int render_setup(){
     // Center ball
     ball.pos_y = HEIGHT/2;
     ball.pos_x = WIDTH/2;
-    ball.radius = 3;
 
     return 0;
 }
@@ -171,11 +170,11 @@ void render_board(){
 
 void draw_ball(){
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
-    for (int w=0; w<ball.radius*2; w++){
-        for (int h=0; h<ball.radius*2; h++){
-            int dx = ball.radius - w; // horizontal offset
-            int dy = ball.radius - h; // vertical offset
-            if ((dx*dx + dy*dy) <= (ball.radius * ball.radius)){
+    for (int w=0; w<BALL_RADIUS*2; w++){
+        for (int h=0; h<BALL_RADIUS*2; h++){
+            int dx = BALL_RADIUS - w; // horizontal offset
+            int dy = BALL_RADIUS - h; // vertical offset
+            if ((dx*dx + dy*dy) <= (BALL_RADIUS * BALL_RADIUS)){
                 SDL_RenderDrawPoint(renderer, ball.pos_x + dx, ball.pos_y + dy);
             }
         }

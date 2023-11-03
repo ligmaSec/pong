@@ -9,6 +9,7 @@
 // Constants
 const int WIDTH = 800, HEIGHT = 600;
 const int FPS = 144, FRAME_DELAY = 1000/FPS;
+const int BALL_RADIUS = 3;
 
 // Structs
 typedef struct {
@@ -17,7 +18,6 @@ typedef struct {
 typedef struct {
     float pos_y;
     float pos_x;
-    int radius;
 } tBall;
 
 // Framerate variables
