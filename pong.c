@@ -216,7 +216,8 @@ void check_collision(){
         // Check if the ball is between the two vertical edges of the player2
         ball.pos_y <= player2.pos_y+25 &&
         ball.pos_y >= player2.pos_y-25 &&
-        ball.pos_x == rect_player2.x
+        ball.pos_x >= rect_player2.x &&
+        ball.pos_x <= rect_player2.x+4
     ){
         update_ball_direction(&player2);
     }
@@ -225,7 +226,8 @@ void check_collision(){
         // Check if the ball is between the two vertical edges of the player1
         ball.pos_y <= player1.pos_y+25 &&
         ball.pos_y >= player1.pos_y-25 &&
-        ball.pos_x == rect_player1.x
+        ball.pos_x >= rect_player1.x &&
+        ball.pos_x <= rect_player1.x+4
     ){
         update_ball_direction(&player1);
     }
