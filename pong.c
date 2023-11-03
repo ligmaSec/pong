@@ -35,7 +35,7 @@ void *net_routine(){
     if (is_server){
         while (playing){
             player2.pos_y = recv_position_server();
-            printf("Opp position: %d\n", player2.pos_y);
+            // printf("Opp position: %d\n", player2.pos_y);
             send_position_server(player1.pos_y, &ball.pos_x, &ball.pos_y);
         }
     } else {
@@ -54,7 +54,7 @@ void *net_routine(){
                 token = strtok(NULL, "$");
                 i++;
             }
-            printf("Opp position: %d\n", player2.pos_y);
+            // printf("Opp position: %d\n", player2.pos_y);
         }
     }
 }
@@ -185,7 +185,7 @@ void render_board(){
 }
 
 void draw_ball(){
-    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+    SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
     for (int w=0; w<BALL_RADIUS*2; w++){
         for (int h=0; h<BALL_RADIUS*2; h++){
             int dx = BALL_RADIUS - w; // horizontal offset

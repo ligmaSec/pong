@@ -10,7 +10,7 @@
 // Constants
 const int WIDTH = 800, HEIGHT = 600;
 const int FPS = 144, FRAME_DELAY = 1000/FPS;
-const int BALL_RADIUS = 3;
+const int BALL_RADIUS = 4;
 const float MAX_BOUNCE_ANGLE = 5*M_PI/12;
 const int PLAYER_MOVEMENT_STEP = 3;
 
