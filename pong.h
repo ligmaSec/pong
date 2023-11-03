@@ -6,7 +6,6 @@
 #include <pthread.h> 
 #include <unistd.h>
 #include <math.h>
-#include <SDL/SDL_ttf>
 
 // Constants
 const int WIDTH = 800, HEIGHT = 600;
@@ -48,7 +47,6 @@ void event_loop();
 void game_loop();
 void draw_ball();
 void move_ball();
-void draw_score(int player1_score, player2_score);
 void check_collision();
 void update_ball_direction(tPlayer *player);
 void render_game_state();

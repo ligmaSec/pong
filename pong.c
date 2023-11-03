@@ -245,8 +245,3 @@ void update_ball_direction(tPlayer *player){
 }
 
 
-void draw_score(int player1_score, int player2_score){
-	
-		
-
-}
