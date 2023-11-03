@@ -215,6 +215,10 @@ void check_collision(){
     ){
         update_ball_direction(&player1);
     }
+
+    else if (ball.pos_y <= 0 || ball.pos_y >= HEIGHT){
+        ball_direction -= M_PI/2;
+    }
 }
 
 void update_ball_direction(tPlayer *player){
