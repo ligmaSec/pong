@@ -1,6 +1,5 @@
 #include "pong.h"
 
-// TODO: hardcore mode
 int main(int argc, char *argv[]){
     int invalid_args = true;
     char* host = "127.0.0.1";
@@ -25,7 +24,6 @@ int main(int argc, char *argv[]){
 
     pthread_t receive_thread_id; 
     pthread_create(&receive_thread_id, NULL, net_routine, NULL);
-    // pthread_join(receive_thread_id, NULL);
 
     game_loop();
     return EXIT_SUCCESS;
@@ -82,7 +80,7 @@ int render_setup(){
         rect_player1.x = WIDTH-34;
         rect_player2.x = 30;
     }
-    rect_player1.w= 4;
+    rect_player1.w = 4;
     rect_player2.w = 4;
     rect_player1.h = 50;
     rect_player2.h = 50;
@@ -170,7 +168,7 @@ void render_game_state(){
 
 void render_board(){
     // Black background
-    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
     SDL_RenderClear(renderer);
     // Draw middle line
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
@@ -236,14 +234,14 @@ void check_collision(){
 
     // Handle player2 win
     else if (ball.pos_x <= 0){
-        scores[0] += 1;
+        scores[1] += 1;
         printf("Scores: %d:%d\n", scores[0], scores[1]);
         reset_ball(true);
     }
 
     // Handle player1 win
     else if (ball.pos_x >= WIDTH){
-        scores[1] += 1;
+        scores[0] += 1;
         printf("Scores: %d:%d\n", scores[0], scores[1]);
         reset_ball(false);
     }
