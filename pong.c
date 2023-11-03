@@ -171,8 +171,8 @@ void render_board(){
 
 void draw_ball(){
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
-    for (int w = 0; w < ball.radius * 2; w++){
-        for (int h = 0; h < ball.radius * 2; h++){
+    for (int w=0; w<ball.radius*2; w++){
+        for (int h=0; h<ball.radius*2; h++){
             int dx = ball.radius - w; // horizontal offset
             int dy = ball.radius - h; // vertical offset
             if ((dx*dx + dy*dy) <= (ball.radius * ball.radius)){
