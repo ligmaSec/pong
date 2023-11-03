@@ -188,10 +188,41 @@ void draw_ball(){
 }
 
 void move_ball(){
+    check_collision();
     // Calculate next position
     float dirX = ball_speed * cos(ball_direction);
     float dirY = ball_speed * sin(ball_direction);
     // Update ball position
     ball.pos_x += dirX;
     ball.pos_y += dirY;
+}
+
+void check_collision(){
+    if (
+        // Check if the ball is between the two vertical edges of the player2
+        ball.pos_y <= player2.pos_y+25 &&
+        ball.pos_y >= player2.pos_y-25 &&
+        ball.pos_x == rect_player2.x
+    ){
+        printf("Collision player2\n");
+        update_ball_direction(&player2);
+    }
+
+    else if (
+        // Check if the ball is between the two vertical edges of the player1
+        ball.pos_y <= player1.pos_y+25 &&
+        ball.pos_y >= player1.pos_y-25 &&
+        ball.pos_x == rect_player1.x
+    ){
+        printf("Collision player1\n");
+        update_ball_direction(&player1);
+    }
+}
+
+void update_ball_direction(tPlayer *player){
+    float offset = (ball.pos_y - player->pos_y) / (rect_player1.h);
+    float phi = 0.25*M_PI*(2*offset-1);
+    float dirX = (ball_speed * cos(ball_direction))*-1;
+    float dirY = ball_speed*sin(phi);
+    ball_direction = atan2(dirY, dirX);
 }

@@ -11,6 +11,7 @@
 const int WIDTH = 800, HEIGHT = 600;
 const int FPS = 144, FRAME_DELAY = 1000/FPS;
 const int BALL_RADIUS = 3;
+const float MAX_BOUNCE_ANGLE = (5*M_PI)/12;
 
 // Structs
 typedef struct {
@@ -36,7 +37,7 @@ SDL_Rect rect_player2;
 bool playing = true;
 bool is_server = true;
 float ball_speed = 1;
-float ball_direction = 2*M_PI;
+float ball_direction = 1*M_PI;
 
 // Prototypes
 int render_setup();
@@ -45,6 +46,8 @@ void event_loop();
 void game_loop();
 void draw_ball();
 void move_ball();
+void check_collision();
+void update_ball_direction(tPlayer *player);
 void render_game_state();
 void render_board();
 void move_player1(int step);
