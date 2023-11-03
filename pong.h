@@ -10,7 +10,7 @@
 // Constants
 const int WIDTH = 800, HEIGHT = 600;
 const int FPS = 144, FRAME_DELAY = 1000/FPS;
-const int BALL_RADIUS = 30;
+const int BALL_RADIUS = 3;
 const float MAX_BOUNCE_ANGLE = (5*M_PI)/12;
 
 // Structs
@@ -37,7 +37,7 @@ SDL_Rect rect_player2;
 SDL_Surface* text;
 bool playing = true;
 bool is_server = true;
-float ball_speed = 1;
+float ball_speed = 2;
 float ball_direction = 2*M_PI;
 
 // Prototypes

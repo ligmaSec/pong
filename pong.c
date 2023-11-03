@@ -109,7 +109,7 @@ void game_loop(){
             keystates[SDL_SCANCODE_S] ||
             keystates[SDL_SCANCODE_DOWN]
         ){
-            move_player1(5);
+            move_player1(3);
         }
 
         // Up movement
@@ -118,7 +118,7 @@ void game_loop(){
             keystates[SDL_SCANCODE_W] ||
             keystates[SDL_SCANCODE_UP]
         ){
-            move_player1(-5);
+            move_player1(-3);
         }
 
         // ball.pos_x = player1.pos_y;
