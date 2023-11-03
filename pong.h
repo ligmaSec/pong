@@ -4,7 +4,8 @@
 #include <stdbool.h>
 #include <SDL2/SDL.h>
 #include <pthread.h> 
-#include <unistd.h> 
+#include <unistd.h>
+#include <math.h>
 
 // Constants
 const int WIDTH = 800, HEIGHT = 600;
@@ -34,13 +35,16 @@ SDL_Rect rect_player1;
 SDL_Rect rect_player2;
 bool playing = true;
 bool is_server = true;
+float ball_speed = 1;
+float ball_direction = 2*M_PI;
 
 // Prototypes
 int render_setup();
+void *net_routine();
 void event_loop();
 void game_loop();
 void draw_ball();
+void move_ball();
 void render_game_state();
 void render_board();
 void move_player1(int step);
-void *net_routine();

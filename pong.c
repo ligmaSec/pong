@@ -110,6 +110,7 @@ void game_loop(){
         }
 
         // ball.pos_x = player1.pos_y;
+        move_ball();
 
         // This measures how long this iteration of the loop took
         frame_time = SDL_GetTicks() - frame_start;
@@ -184,4 +185,13 @@ void draw_ball(){
             }
         }
     }
+}
+
+void move_ball(){
+    // Calculate next position
+    float dirX = ball_speed * cos(ball_direction);
+    float dirY = ball_speed * sin(ball_direction);
+    // Update ball position
+    ball.pos_x += dirX;
+    ball.pos_y += dirY;
 }
