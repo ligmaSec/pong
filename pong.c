@@ -34,14 +34,26 @@ int main(int argc, char *argv[]){
 void *net_routine(){
     if (is_server){
         while (playing){
-            player2.pos_y = recv_position();
+            player2.pos_y = recv_position_server();
             printf("Opp position: %d\n", player2.pos_y);
-            send_position(player1.pos_y);
+            send_position_server(player1.pos_y, &ball.pos_x, &ball.pos_y);
         }
     } else {
         while (playing){
-            send_position(player1.pos_y);
-            player2.pos_y = recv_position();
+            send_position_client(player1.pos_y);
+            char* data;
+            recv_position_client(&data);
+            // printf("Received data: %s\n", data);
+            
+            char* token = strtok(data, "$");
+            int i = 0;
+            while (token != NULL){
+                if (i == 0) player2.pos_y = atoi(token);
+                else if (i == 1) ball.pos_x = atof(token);
+                else ball.pos_y = atof(token);
+                token = strtok(NULL, "$");
+                i++;
+            }
             printf("Opp position: %d\n", player2.pos_y);
         }
     }
@@ -188,13 +200,15 @@ void draw_ball(){
 }
 
 void move_ball(){
-    check_collision();
-    // Calculate next position
-    float dirX = ball_speed * cos(ball_direction);
-    float dirY = ball_speed * sin(ball_direction);
-    // Update ball position
-    ball.pos_x += dirX;
-    ball.pos_y += dirY;
+    if (is_server){
+        check_collision();
+        // Calculate next position
+        float dirX = ball_speed * cos(ball_direction);
+        float dirY = ball_speed * sin(ball_direction);
+        // Update ball position
+        ball.pos_x += dirX;
+        ball.pos_y += dirY;
+    }
 }
 
 void check_collision(){
