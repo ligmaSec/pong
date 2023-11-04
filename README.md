@@ -6,4 +6,4 @@ multiplayer pong game made using SDL library over udp sockets
 ``` ./pong```
 
 ## client 
-``` ./pong <server_address>```
+``` ./pong -c <server_address>```
