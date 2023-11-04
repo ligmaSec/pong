@@ -35,7 +35,6 @@ void *net_routine(){
     if (is_server){
         while (playing){
             player2.pos_y = recv_position_server();
-            printf("Opp position: %d\n", player2.pos_y);
             send_position_server(player1.pos_y, &ball.pos_x, &ball.pos_y);
         }
     } else {
@@ -54,7 +53,6 @@ void *net_routine(){
                 token = strtok(NULL, "$");
                 i++;
             }
-            printf("Opp position: %d\n", player2.pos_y);
         }
     }
 }
