@@ -95,8 +95,8 @@ void game_loop(){
         // Stores the number of ticks at the start of the loop
         frame_start = SDL_GetTicks();
 
-        event_loop();
         render_game_state();
+        event_loop();
 
         const Uint8* keystates = SDL_GetKeyboardState(NULL);
         // Down movement
@@ -155,6 +155,7 @@ void move_player1(int step){
 }
 
 void render_game_state(){
+	SDL_RenderClear(renderer);
     render_board();
     rect_player1.y = player1.pos_y-25;
     rect_player2.y = player2.pos_y-25;
@@ -177,7 +178,7 @@ void render_board(){
             }
         }
     }
-    SDL_RenderPresent(renderer);
+    // SDL_RenderPresent(renderer);
 }
 
 void draw_ball(){
