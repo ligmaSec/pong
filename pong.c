@@ -226,9 +226,10 @@ void check_collision(){
         update_ball_direction(&player1);
     }
 
-    else if (ball.pos_y <= 0 || ball.pos_y >= HEIGHT){
-        ball_direction -= M_PI/2;
-    }
+    // Handle top and bottom collisions
+	else if (ball.pos_y <= 0 || ball.pos_y >= HEIGHT){
+		ball_direction = -ball_direction;
+	}
 
     // Handle player2 win
     else if (ball.pos_x <= 0){
