@@ -178,7 +178,6 @@ void render_board(){
             }
         }
     }
-    // SDL_RenderPresent(renderer);
 }
 
 void draw_ball(){
@@ -214,7 +213,7 @@ void check_collision(){
         ball.pos_x >= rect_player2.x &&
         ball.pos_x <= rect_player2.x+4
     ){
-        update_ball_direction(&player2);
+        update_ball_direction(&player2, false);
     }
 
     else if (
@@ -224,7 +223,7 @@ void check_collision(){
         ball.pos_x >= rect_player1.x &&
         ball.pos_x <= rect_player1.x+4
     ){
-        update_ball_direction(&player1);
+        update_ball_direction(&player1, true);
     }
 
     // Handle top and bottom collisions
@@ -247,8 +246,13 @@ void check_collision(){
     }
 }
 
-void update_ball_direction(tPlayer *player){
-    float relative_intersect_y = ball.pos_y - player->pos_y;
+void update_ball_direction(tPlayer *player, bool left_player){
+	float relative_intersect_y;
+	if (left_player){
+    	relative_intersect_y = ball.pos_y - player->pos_y;
+	} else {
+		relative_intersect_y = ball.pos_y + player->pos_y;
+	}
     float normalized_intersect = relative_intersect_y / rect_player1.h;
     float angle_change = normalized_intersect * MAX_BOUNCE_ANGLE;
     ball_direction = M_PI - ball_direction + 2 * angle_change;

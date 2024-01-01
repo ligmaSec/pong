@@ -38,7 +38,7 @@ SDL_Rect rect_player2;
 SDL_Surface* text;
 bool playing = true;
 bool is_server = true;
-float ball_speed = 2;
+float ball_speed = 3;
 float ball_direction = 2*M_PI;
 int scores[2] = {0, 0};
 
@@ -50,7 +50,7 @@ void game_loop();
 void draw_ball();
 void move_ball();
 void check_collision();
-void update_ball_direction(tPlayer *player);
+void update_ball_direction(tPlayer *player, bool left_player);
 void render_game_state();
 void render_board();
 void move_player1(int step);
